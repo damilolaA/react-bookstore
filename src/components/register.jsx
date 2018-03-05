@@ -6,31 +6,52 @@ class Register extends Component {
 	constructor() {
 		super()
 		this.state = {
-			adminDetails: {}
+			errorMessages: {}
 		}
 
-		this.handleForm = this.handleForm.bind(this)
+		this.handleForm = this.handleForm.bind(this);
+	}
+
+	inputValues() {
+		let adminDetails = {
+			firstName: this.refs.firstName.value,
+			lastName: this.refs.lastName.value,
+			email: this.refs.email.value,
+			hash: this.refs.password.value
+		};
+
+		return adminDetails;
 	}
 
 	handleForm(e) {
 		e.preventDefault();
 
-		this.setState({adminDetails: {
-			firstName: this.refs.fname.value,
-			lastName: this.refs.fname.value,
-			email: this.refs.email.value,
-			hash: this.refs.password.value
-		}})
+		this.validateInput();
 
 		this.postAdminData();
 	}
 
+	validateInput() {
+		var dummy = {errorMessages: {}};
+		let data = this.refs;
+
+		for(var ref in data) {
+			if(data[ref].value === "") {
+				dummy.errorMessages[ref] = "please enter your " + ref;
+			}
+		}
+
+		this.setState(dummy);
+	}
+
 	postAdminData() {
-		if(this.state.adminDetails.hasOwnProperty('firstName')) {
+		let data = this.inputValues();
+
+		if(data) {
 			axios({
 				method: 'post',
 				url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
-				data: this.state.adminDetails
+				data: data
 			})
 			.then(response => {
 				console.log(response);
@@ -58,25 +79,26 @@ class Register extends Component {
 					<form id="register" onSubmit={this.handleForm}>
 						<div>
 							<label>first name:</label>
-							<input type="text" ref="fname" placeholder="first name"/>
-						</div>
-						<div>
-							<label>last name:</label>	
-							<input type="text" ref="lname" placeholder="last name"/>
+							<p className="err">{this.state.errorMessages.firstName ? this.state.errorMessages.firstName : ""}</p>
+							<input type="text" ref="firstName" placeholder="first name"/>
 						</div>
 
 						<div>
+							<p className="err">{this.state.errorMessages.lastName ? this.state.errorMessages.lastName : ""}</p>
+							<label>last name:</label>	
+							<input type="text" ref="lastName" placeholder="last name"/>
+						</div>
+
+						<div>
+							<p className="err">{this.state.errorMessages.email ? this.state.errorMessages.email : ""}</p>
 							<label>email:</label>
 							<input type="text" ref="email" placeholder="email"/>
 						</div>
+
 						<div>
+							<p className="err">{this.state.errorMessages.password ? this.state.errorMessages.password : ""}</p>
 							<label>password:</label>
 							<input type="password" ref="password" placeholder="password"/>
-						</div>
-			 
-						<div>
-							<label>confirm password:</label>	
-							<input type="password" ref="pword" placeholder="password"/>
 						</div>
 
 						<input type="submit" name="register" value="register"/>
