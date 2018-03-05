@@ -48,7 +48,12 @@ class Register extends Component {
 		let data = this.inputValues(),
 			err = this.state.errorMessages;
 
-		if(Object.keys(err).length < 0) {
+		console.log(err);
+		console.log(data);
+
+		console.log(Object.keys(err).length);
+
+		if(Object.keys(err).length <= 0) {
 			axios({
 				method: 'post',
 				url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
@@ -78,6 +83,7 @@ class Register extends Component {
 					<h1 id="register-label">Register</h1>
 					<hr/>
 					<form id="register" onSubmit={this.handleForm}>
+						
 						<div>
 							<label>first name:</label>
 							<p className="err">{this.state.errorMessages.firstName ? this.state.errorMessages.firstName : ""}</p>
