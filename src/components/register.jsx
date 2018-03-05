@@ -45,9 +45,10 @@ class Register extends Component {
 	}
 
 	postAdminData() {
-		let data = this.inputValues();
+		let data = this.inputValues(),
+			err = this.state.errorMessages;
 
-		if(data) {
+		if(Object.keys(err).length < 0) {
 			axios({
 				method: 'post',
 				url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
