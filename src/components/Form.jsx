@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Form extends Component{
 
@@ -6,10 +7,13 @@ class Form extends Component{
 		super()
 		this.state = {
 			errorMessages:{},
-			"fname": "",
-			"lname": "",
-			"email": "",
-			"password": ""
+			adminData: {
+				"firstName": "",
+				"lastName": "",
+				"email": "",
+				"hash": ""
+			},
+			id:""
 		}
 
 		this.submitForm = this.submitForm.bind(this);
@@ -20,10 +24,14 @@ class Form extends Component{
 		e.preventDefault();
 
 		this.validateForm();
+
+		this.postAdminData();
+
+		this.clearForm();
 	}
 
 	handleChange(e) {
-		let dummy = {},
+		let dummy = this.state.adminData,
 		input = e.target.name;
 
 		dummy[input] = e.target.value;
@@ -31,8 +39,16 @@ class Form extends Component{
 		this.setState(dummy);
 	}
 
+	clearForm() {
+		let id = this.state.id;
+
+		if(id) {	
+			this.setState({adminData: ""});
+		}
+	}
+
 	validateForm() {
-		let data = this.state,
+		let data = this.state.adminData,
 			errors = {errorMessages:{}};
 
 		for(let value in data) {
@@ -44,23 +60,45 @@ class Form extends Component{
 		}
 	}
 
+	postAdminData() {
+		let data = this.state.adminData;
+
+		console.log(data);
+
+		if(data) {
+			axios({
+				method: 'post',
+				url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
+				data: data
+			})
+			.then(response => {
+				console.log(response);
+				this.setState({id: response.data._id});
+			})
+			.catch(err => {
+				console.log(err);
+			})
+		} else {
+			console.log('request not successful');
+		}
+	}
+
 	render() {
-		console.log(this.state);
 		return(
 			<div className="wrapper">
 				<h1 id="register-label">Register</h1>
 				<hr/>
 				<form id="register" onSubmit={this.submitForm}>
 					<div>
-						<p className='err'>{this.state.errorMessages.fname ? this.state.errorMessages.fname : ""}</p>
+						<p className='err'>{this.state.errorMessages.firstName ? this.state.errorMessages.firstName : ""}</p>
 						<label>first name:</label>
-						<input onChange={this.handleChange} type="text" name="fname" placeholder="first name"/>
+						<input onChange={this.handleChange} type="text" name="firstName" placeholder="first name"/>
 					</div>
 
 					<div>
-						<p className='err'>{this.state.errorMessages.lname ? this.state.errorMessages.lname : ""}</p>
+						<p className='err'>{this.state.errorMessages.lastName ? this.state.errorMessages.lastName : ""}</p>
 						<label>last name:</label>	
-						<input onChange={this.handleChange} type="text" name="lname" placeholder="last name"/>
+						<input onChange={this.handleChange} type="text" name="lastName" placeholder="last name"/>
 					</div>
 
 					<div>
@@ -70,9 +108,9 @@ class Form extends Component{
 					</div>
 
 					<div>
-						<p className='err'>{this.state.errorMessages.password ? this.state.errorMessages.password : ""}</p>
+						<p className='err'>{this.state.errorMessages.hash ? this.state.errorMessages.hash : ""}</p>
 						<label>password:</label>
-						<input onChange={this.handleChange} type="password" name="password" placeholder="password"/>
+						<input onChange={this.handleChange} type="password" name="hash" placeholder="password"/>
 					</div>
 
 					<input type="submit" name="register" value="register"/>
