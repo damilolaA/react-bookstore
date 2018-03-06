@@ -1,0 +1,29 @@
+import React, { Component } from 'react';
+
+class LoginForm extends Component {
+
+	render() {
+		return (
+			<div className="wrapper">
+				<h1 id="register-label">Admin Login</h1>
+				<hr/>
+				<form id="register">
+					<div>
+						<label>email:</label>
+						<input type="text" name="email" placeholder="email"/>
+					</div>
+					<div>
+						<label>password:</label>
+						<input type="password" name="password" placeholder="password"/>
+					</div>
+
+					<input type="submit" name="register" value="login"/>
+				</form>
+
+				<h4 className="jumpto">Don't have an account? <a href="">register</a></h4>
+			<div/>
+		);
+	}
+}
+
+export default LoginForm;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import AdminRegister from "./components/AdminRegister";
+import AdminRegister from './components/AdminRegister';
+import AdminLogin from './components/AdminLogin';
 
 
 const App = () => (
@@ -10,6 +11,7 @@ const App = () => (
       <div className="App">
       	<Switch>
       		<Route path="/" component={AdminRegister}/>
+      		<Route path="/login" component={AdminLogin} />
       	</Switch>
       </div>
     </BrowserRouter>
