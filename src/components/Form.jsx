@@ -1,125 +1,126 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Form extends Component{
+class Form extends Component {
+  constructor() {
+    super();
+    this.state = {
+      errorMessages: {},
+      adminData: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        hash: ''
+      },
+      id: ''
+    };
 
-	constructor() {
-		super()
-		this.state = {
-			errorMessages:{},
-			adminData: {
-				"firstName": "",
-				"lastName": "",
-				"email": "",
-				"hash": ""
-			},
-			id:""
-		}
+    this.submitForm = this.submitForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-		this.submitForm = this.submitForm.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-	}
+  submitForm(e) {
+    e.preventDefault();
 
-	submitForm(e) {
-		e.preventDefault();
+    this.validateForm();
 
-		this.validateForm();
+    this.postAdminData();
 
-		this.postAdminData();
+    this.clearForm();
+  }
 
-		this.clearForm();
-	}
+  handleChange(e) {
+    let dummy = this.state.adminData,
+      input = e.target.name;
 
-	handleChange(e) {
-		let dummy = this.state.adminData,
-		input = e.target.name;
+    dummy[input] = e.target.value;
 
-		dummy[input] = e.target.value;
+    this.setState(dummy);
+  }
 
-		this.setState(dummy);
-	}
+  clearForm() {
+    let id = this.state.id;
 
-	clearForm() {
-		let id = this.state.id;
+    if (id) {
+      this.setState({ adminData: '' });
+    }
+  }
 
-		if(id) {	
-			this.setState({adminData: ""});
-		}
-	}
+  validateForm() {
+    let data = this.state.adminData,
+      errors = { errorMessages: {} };
 
-	validateForm() {
-		let data = this.state.adminData,
-			errors = {errorMessages:{}};
+    for (let value in data) {
+      if (data[value] === '') {
+        errors.errorMessages[value] = 'Please enter your ' + value;
+        this.setState(errors);
+        return;
+      }
+    }
+  }
 
-		for(let value in data) {
-			if(data[value] === "") {
-				errors.errorMessages[value] = "Please enter your " + value;
-				this.setState(errors);
-				return;
-			}
-		}
-	}
+  postAdminData() {
+    let data = this.state.adminData;
 
-	postAdminData() {
-		let data = this.state.adminData;
+    console.log(data);
 
-		console.log(data);
+    if (data) {
+      axios({
+        method: 'post',
+        url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
+        data: data
+      })
+        .then(response => {
+          console.log(response);
+          this.setState({ id: response.data._id });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      console.log('request not successful');
+    }
+  }
 
-		if(data) {
-			axios({
-				method: 'post',
-				url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
-				data: data
-			})
-			.then(response => {
-				console.log(response);
-				this.setState({id: response.data._id});
-			})
-			.catch(err => {
-				console.log(err);
-			})
-		} else {
-			console.log('request not successful');
-		}
-	}
+  render() {
+    return (
+      <div className="wrapper">
+        <h1 id="register-label">Register</h1>
+        <hr />
+        <form id="register" onSubmit={this.submitForm}>
+          <div>
+            <p className="err">{this.state.errorMessages.firstName ? this.state.errorMessages.firstName : ''}</p>
+            <label>first name:</label>
+            <input onChange={this.handleChange} type="text" name="firstName" placeholder="first name" />
+          </div>
 
-	render() {
-		return(
-			<div className="wrapper">
-				<h1 id="register-label">Register</h1>
-				<hr/>
-				<form id="register" onSubmit={this.submitForm}>
-					<div>
-						<p className='err'>{this.state.errorMessages.firstName ? this.state.errorMessages.firstName : ""}</p>
-						<label>first name:</label>
-						<input onChange={this.handleChange} type="text" name="firstName" placeholder="first name"/>
-					</div>
+          <div>
+            <p className="err">{this.state.errorMessages.lastName ? this.state.errorMessages.lastName : ''}</p>
+            <label>last name:</label>
+            <input onChange={this.handleChange} type="text" name="lastName" placeholder="last name" />
+          </div>
 
-					<div>
-						<p className='err'>{this.state.errorMessages.lastName ? this.state.errorMessages.lastName : ""}</p>
-						<label>last name:</label>	
-						<input onChange={this.handleChange} type="text" name="lastName" placeholder="last name"/>
-					</div>
+          <div>
+            <p className="err">{this.state.errorMessages.email ? this.state.errorMessages.email : ''}</p>
+            <label>email:</label>
+            <input onChange={this.handleChange} type="text" name="email" placeholder="email" />
+          </div>
 
-					<div>
-						<p className='err'>{this.state.errorMessages.email ? this.state.errorMessages.email : ""}</p>
-						<label>email:</label>
-						<input onChange={this.handleChange} type="text" name="email" placeholder="email"/>
-					</div>
+          <div>
+            <p className="err">{this.state.errorMessages.hash ? this.state.errorMessages.hash : ''}</p>
+            <label>password:</label>
+            <input onChange={this.handleChange} type="password" name="hash" placeholder="password" />
+          </div>
 
-					<div>
-						<p className='err'>{this.state.errorMessages.hash ? this.state.errorMessages.hash : ""}</p>
-						<label>password:</label>
-						<input onChange={this.handleChange} type="password" name="hash" placeholder="password"/>
-					</div>
+          <input type="submit" name="register" value="register" />
+        </form>
 
-					<input type="submit" name="register" value="register"/>
-				</form>
-
-				<h4 className="jumpto">Have an account? <a href="">login</a></h4>
-			</div>
-		);
-	}
+        <h4 className="jumpto">
+          Have an account? <a href="">login</a>
+        </h4>
+      </div>
+    );
+  }
 }
 
 export default Form;
