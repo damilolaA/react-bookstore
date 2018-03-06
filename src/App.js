@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import AdminRegister from "./components/AdminRegister";
 
 
-class App extends Component {
-  render() {
-    return (
+const App = () => (
+  
+    
+    <BrowserRouter>
       <div className="App">
-      	<AdminRegister />
+      	<Switch>
+      		<Route path="/" component={AdminRegister}/>
+      	</Switch>
       </div>
-    );
-  }
-}
+    </BrowserRouter>
+ 
+);
 
 export default App;
