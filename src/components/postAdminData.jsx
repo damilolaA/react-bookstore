@@ -1,31 +1,41 @@
+/*import React, { Component } from 'react';
 import axios from "axios";
+import Register from "./register";
 
-const PostData = (props) => {
+class PostData extends Component{
 
-	let err = props.error,
-		data = props.data;
+	const postAdminData = () => {
+		let data = this.inputValues(),
+			err = this.state.errorMessages;
+			
+		let err = props.error,
+			data = props.data;
 
-	console.log(err);
-	console.log(data);
-
-	if(Object.keys(err).length < 0) {
-		axios({
-			method: 'post',
-			url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
-			data: data
-		})
-		.then(response => {
-			console.log(response);
-		})
-		.catch(err => {
-			console.log(err);
-		})
-	} else {
-		console.log('request not successful');
+		if(Object.keys(err).length < 0) {
+			axios({
+				method: 'post',
+				url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
+				data: data
+			})
+			.then(response => {
+				console.log(response);
+			})
+			.catch(err => {
+				console.log(err);
+			})
+		} else {
+			console.log('request not successful');
+		}
 	}
 
-	return (null);
+	render() {
+		return(
+			<div>
+				<Register postAdminData={this.postAdminData.bind(this)}/>
+			</div>
+		)
+	}
 	
 }
 
-export default PostData;
+export default PostData;*/

@@ -6,7 +6,8 @@ class Register extends Component {
 	constructor() {
 		super()
 		this.state = {
-			errorMessages: {}
+			errorMessages: {},
+			adminData: ""
 		}
 
 		this.handleForm = this.handleForm.bind(this);
@@ -51,8 +52,6 @@ class Register extends Component {
 		console.log(err);
 		console.log(data);
 
-		console.log(Object.keys(err).length);
-
 		if(Object.keys(err).length <= 0) {
 			axios({
 				method: 'post',
@@ -61,6 +60,7 @@ class Register extends Component {
 			})
 			.then(response => {
 				console.log(response);
+				this.setState({adminData: response});
 			})
 			.catch(err => {
 				console.log(err);
@@ -71,6 +71,7 @@ class Register extends Component {
 	}
 
 	render() {
+
 		return(	
 			<div>
 				<section>
