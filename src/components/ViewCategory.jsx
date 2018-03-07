@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
+import DisplayCategories from './DisplayCategories';
 
 class ViewCategory extends Component {
 
@@ -15,7 +16,7 @@ class ViewCategory extends Component {
 	componentDidMount() {
 		axios.get('https://bookstoreappapi.herokuapp.com/api/v1/category')
 		.then(response => {
-			this.setState({categoryData: response});
+			this.setState({categoryData: {data: response.data}});
 		})
 		.catch(err => {
 			console.log(err);
@@ -23,7 +24,7 @@ class ViewCategory extends Component {
 	}
 
 	render() {
-		
+		console.log(this.state);
 		return (
 			<div>
 				<Header nav />
@@ -38,14 +39,9 @@ class ViewCategory extends Component {
 									<th>delete</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>the knowledge gap</td>
-									<td>maja</td>
-									<td><a href="">edit</a></td>
-									<td><a href="">delete</a></td>
-								</tr>
-			          		</tbody>
+							
+							<DisplayCategories data={this.state.categoryData.data}/>
+			          		
 						</table>
 					</div>
 				</div>
