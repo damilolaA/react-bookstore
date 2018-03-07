@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class LoginForm extends Component{
 
@@ -8,7 +9,9 @@ class LoginForm extends Component{
 			loginDetails: {
 				email: "",
 				password: ""
-			}
+			},
+			errorMessages: {},
+			responseData: {}
 		}
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,25 +29,64 @@ class LoginForm extends Component{
 
 	handleSubmit(e) {
 		e.preventDefault();
+
+		this.validateLoginDetails();
+
+		this.postLoginData();
 	}
 
 	validateLoginDetails() {
+		let data = this.state.loginDetails,
+		  errors = { errorMessages: {} };
 
+		for (let value in data) {
+		  if (data[value] === '') {
+		    errors.errorMessages[value] = 'Please enter your ' + value;
+		    this.setState(errors);
+		  }
+		}
+
+		return;
+	}
+
+	postLoginData() {
+		let loginData = this.state.loginDetails;
+
+		if(loginData['email'] !== "" && loginData['password'] !== "") {
+			axios({
+				method: 'post',
+		        url: 'https://bookstoreappapi.herokuapp.com/api/v1/auth',
+		        data: loginData
+			})
+			.then(response => {
+				console.log(response.data);
+				let responseData = response.data;
+
+				this.setState({responseData: responseData});
+			})
+			.catch(err => {
+				console.log(err);
+			})
+		} else {
+			console.log("no data to post");
+		}
 	}
 
 	render() {
-		console.log(this.state);
+		
 		return (
 			<div className="wrapper">
 				<h1 id="register-label">Admin Login</h1>
 				<hr/>
 				<form id="register" onSubmit={this.handleSubmit}>
 					<div>
+						<p className="err">{this.state.errorMessages.email ? this.state.errorMessages.email : ""}</p>
 						<label>email:</label>
 						<input onChange={this.handleChange} type="text" name="email" placeholder="email"/>
 					</div>
 
 					<div>
+						<p className="err">{this.state.errorMessages.password ? this.state.errorMessages.password : ""}</p>
 						<label>password:</label>
 						<input onChange={this.handleChange} type="password" name="password" placeholder="password"/>
 					</div>

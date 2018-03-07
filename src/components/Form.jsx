@@ -54,9 +54,10 @@ class Form extends Component {
       if (data[value] === '') {
         errors.errorMessages[value] = 'Please enter your ' + value;
         this.setState(errors);
-        return;
       }
     }
+
+     return;
   }
 
   postAdminData() {
@@ -64,7 +65,7 @@ class Form extends Component {
 
     console.log(data);
 
-    if (data) {
+    if (data['firstName'] !== "" && data['lastName'] !== "" && data['email'] !== "" && data['hash'] !== "") {
       axios({
         method: 'post',
         url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
