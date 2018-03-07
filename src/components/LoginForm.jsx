@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class LoginForm extends Component{
@@ -11,7 +12,8 @@ class LoginForm extends Component{
 				password: ""
 			},
 			errorMessages: {},
-			responseData: {}
+			responseData: {},
+			redirect: false
 		}
 
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -63,6 +65,7 @@ class LoginForm extends Component{
 				let responseData = response.data;
 
 				this.setState({responseData: responseData});
+				this.setState({redirect: true});
 			})
 			.catch(err => {
 				console.log(err);
@@ -73,7 +76,12 @@ class LoginForm extends Component{
 	}
 
 	render() {
-		
+		const { redirect } = this.state;
+
+	    if(redirect) {
+	      return <Redirect to='/dashboard'/>
+	    }
+
 		return (
 			<div className="wrapper">
 				<h1 id="register-label">Admin Login</h1>

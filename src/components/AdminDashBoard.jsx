@@ -7,7 +7,7 @@ const AdminDashboard = () => {
 	
 	return(
 		<div>
-			<Header />
+			<Header nav />
 			<Footer />
 		</div>
 	)

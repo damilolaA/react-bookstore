@@ -96,40 +96,42 @@ class Form extends Component {
     }
 
     return (
-      <div className="wrapper">
-        <h1 id="register-label">Register</h1>
-        <hr />
-        <form id="register" onSubmit={this.submitForm}>
-          <div>
-            <p className="err">{this.state.errorMessages.firstName ? this.state.errorMessages.firstName : ''}</p>
-            <label>first name:</label>
-            <input onChange={this.handleChange} type="text" name="firstName" placeholder="first name" />
-          </div>
+      <div>
+        <div className="wrapper">
+          <h1 id="register-label">Register</h1>
+          <hr />
+          <form id="register" onSubmit={this.submitForm}>
+            <div>
+              <p className="err">{this.state.errorMessages.firstName ? this.state.errorMessages.firstName : ''}</p>
+              <label>first name:</label>
+              <input onChange={this.handleChange} type="text" name="firstName" placeholder="first name" />
+            </div>
 
-          <div>
-            <p className="err">{this.state.errorMessages.lastName ? this.state.errorMessages.lastName : ''}</p>
-            <label>last name:</label>
-            <input onChange={this.handleChange} type="text" name="lastName" placeholder="last name" />
-          </div>
+            <div>
+              <p className="err">{this.state.errorMessages.lastName ? this.state.errorMessages.lastName : ''}</p>
+              <label>last name:</label>
+              <input onChange={this.handleChange} type="text" name="lastName" placeholder="last name" />
+            </div>
 
-          <div>
-            <p className="err">{this.state.errorMessages.email ? this.state.errorMessages.email : ''}</p>
-            <label>email:</label>
-            <input onChange={this.handleChange} type="text" name="email" placeholder="email" />
-          </div>
+            <div>
+              <p className="err">{this.state.errorMessages.email ? this.state.errorMessages.email : ''}</p>
+              <label>email:</label>
+              <input onChange={this.handleChange} type="text" name="email" placeholder="email" />
+            </div>
 
-          <div>
-            <p className="err">{this.state.errorMessages.hash ? this.state.errorMessages.hash : ''}</p>
-            <label>password:</label>
-            <input onChange={this.handleChange} type="password" name="hash" placeholder="password" />
-          </div>
+            <div>
+              <p className="err">{this.state.errorMessages.hash ? this.state.errorMessages.hash : ''}</p>
+              <label>password:</label>
+              <input onChange={this.handleChange} type="password" name="hash" placeholder="password" />
+            </div>
 
-          <input type="submit" name="register" value="register" />
-        </form>
+            <input type="submit" name="register" value="register" />
+          </form>
 
-        <h4 className="jumpto">
-          Have an account? <a href="/login">login</a>
-        </h4>
+          <h4 className="jumpto">
+            Have an account? <a href="/login">login</a>
+          </h4>
+        </div>
       </div>
     );
   }

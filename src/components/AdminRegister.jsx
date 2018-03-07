@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './Form';
-import Header from './Header';
 import Footer from './Footer';
+import Header from './Header';
 
 const AdminRegister = () => {
   return (
