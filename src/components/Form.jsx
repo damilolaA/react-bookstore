@@ -116,7 +116,7 @@ class Form extends Component {
         </form>
 
         <h4 className="jumpto">
-          Have an account? <a href="">login</a>
+          Have an account? <a href="/login">login</a>
         </h4>
       </div>
     );

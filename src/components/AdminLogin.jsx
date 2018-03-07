@@ -1,15 +1,17 @@
-import react from 'React';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import LoginForm from './LoginForm';
 
-const AdminLogin = () => (
+const AdminLogin = () => {
 
-	<div>
-		<Header />
-		<LoginForm />
-		<Footer />
-	</div>
-);
+	return (
+		<div>
+			<Header />
+			<LoginForm />
+			<Footer />
+		</div>
+	);
+}
 
 export default AdminLogin;

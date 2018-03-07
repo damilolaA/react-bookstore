@@ -10,7 +10,7 @@ const App = () => (
     <BrowserRouter>
       <div className="App">
       	<Switch>
-      		<Route path="/" component={AdminRegister}/>
+      		<Route path="/register" component={AdminRegister}/>
       		<Route path="/login" component={AdminLogin} />
       	</Switch>
       </div>
