@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import AdminRegister from './components/AdminRegister';
 import AdminLogin from './components/AdminLogin';
 import AdminDashBoard from './components/AdminDashBoard';
+import ViewCategory from './components/ViewCategory';
 
 
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
       		<Route path="/register" component={AdminRegister}/>
       		<Route path="/login" component={AdminLogin} />
       		<Route path="/dashboard" component={AdminDashBoard}/>
+      		<Route path="/categories" component={ViewCategory}/>
       	</Switch>
       </div>
     </BrowserRouter>
