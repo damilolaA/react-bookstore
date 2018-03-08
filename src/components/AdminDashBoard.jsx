@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
@@ -7,7 +8,8 @@ class AdminDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      categoryData: {}
+      categoryData: {},
+      redirect: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,6 +43,9 @@ class AdminDashboard extends Component {
       })
         .then(response => {
           console.log(response);
+          if(response) {
+          	this.setState({redirect: true});
+          }
         })
         .catch(err => {
           console.log(err);
@@ -51,6 +56,11 @@ class AdminDashboard extends Component {
   }
 
   render() {
+
+  	if(this.state.redirect) {
+  		return <Redirect to='/categories'/>
+  	}
+
     return (
       <div>
         <Header nav />
