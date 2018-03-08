@@ -67,7 +67,7 @@ class AdminDashboard extends Component {
 		              <input onChange={this.handleChange} type="text" name="categoryName" placeholder="category name" />
 		            </div>
 
-		            <input type="submit" name="category" value="register" />
+		            <input type="submit" name="category" value="Add" />
 		          </form>
 				</div>
 				<Footer />

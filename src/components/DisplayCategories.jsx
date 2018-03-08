@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const DisplayCategories = (props) => {
 
@@ -8,9 +9,8 @@ const DisplayCategories = (props) => {
 
 		props.data.forEach(category => {
 
-			categoryTable.push(<tr><td>{category._id}</td><td>{category.categoryName}</td><td><a href="">edit</a></td><td><a href="">delete</a></td></tr>)
+			categoryTable.push(<tr><td>{category._id}</td><td>{category.categoryName}</td><td><Link to={`/editCategory/${category._id}&${category.categoryName}`}>edit</Link></td><td><Link to="/deleteCategory">delete</Link></td></tr>)
 
-			//return categoryTable;
 		})
 	}
 
