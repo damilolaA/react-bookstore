@@ -59,7 +59,7 @@ class Form extends Component {
       }
     }
 
-     return;
+    return;
   }
 
   postAdminData() {
@@ -67,7 +67,7 @@ class Form extends Component {
 
     console.log(data);
 
-    if (data['firstName'] !== "" && data['lastName'] !== "" && data['email'] !== "" && data['hash'] !== "") {
+    if (data['firstName'] !== '' && data['lastName'] !== '' && data['email'] !== '' && data['hash'] !== '') {
       axios({
         method: 'post',
         url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',
@@ -77,7 +77,7 @@ class Form extends Component {
           console.log(response);
           this.setState({ id: response.data._id });
 
-          this.setState({redirect: true});
+          this.setState({ redirect: true });
         })
         .catch(err => {
           console.log(err);
@@ -88,11 +88,10 @@ class Form extends Component {
   }
 
   render() {
-
     const { redirect } = this.state;
 
-    if(redirect) {
-      return <Redirect to='/login'/>
+    if (redirect) {
+      return <Redirect to="/login" />;
     }
 
     return (

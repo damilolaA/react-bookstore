@@ -4,14 +4,13 @@ import Footer from './Footer';
 import LoginForm from './LoginForm';
 
 const AdminLogin = () => {
-
-	return (
-		<div>
-			<Header />
-			<LoginForm />
-			<Footer />
-		</div>
-	);
-}
+  return (
+    <div>
+      <Header />
+      <LoginForm />
+      <Footer />
+    </div>
+  );
+};
 
 export default AdminLogin;

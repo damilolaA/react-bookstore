@@ -1,26 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const DisplayCategories = (props) => {
+const DisplayCategories = props => {
+  const removeCat = (name, i) => {
+    props.removeCategory(name, i);
 
-	let categoryTable = [];
+    let id = name._id;
 
-	if(props.data) {
+    deleteCat(id);
+  };
 
-		props.data.forEach(category => {
+  const deleteCat = id => {
+    if (id) {
+      axios({
+        method: 'delete',
+        url: `https://bookstoreappapi.herokuapp.com/api/v1/category/${id}`,
+        data: null
+      })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
 
-			categoryTable.push(<tr><td>{category._id}</td><td>{category.categoryName}</td><td><Link to={`/editCategory/${category._id}&${category.categoryName}`}>edit</Link></td><td><Link to={`/deleteCategory/${category._id}`}>delete</Link></td></tr>)
+  let categoryTable = [];
 
-		})
-	}
+  if (props.data) {
+    props.data.forEach((category, i) => {
+      categoryTable.push(
+        <tr>
+          <td>{category._id}</td>
+          <td>{category.categoryName}</td>
+          <td>
+            <Link to={`/editCategory/${category._id}&${category.categoryName}`}>edit</Link>
+          </td>
+          <td>
+            <a
+              onClick={() => {
+                removeCat(category, i);
+              }}
+              key={i}
+            >
+              delete
+            </a>
+          </td>
+        </tr>
+      );
+    });
+  }
 
-	return(
-		
-		<tbody>
-			{categoryTable}
-		</tbody>
-		
-	)
-}
+  return <tbody>{categoryTable}</tbody>;
+};
 
 export default DisplayCategories;
