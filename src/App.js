@@ -5,6 +5,7 @@ import AdminLogin from './components/AdminLogin';
 import AdminDashBoard from './components/AdminDashBoard';
 import ViewCategory from './components/ViewCategory';
 import EditCategory from './components/EditCategory';
+import DeleteCategory from './components/DeleteCategory';
 
 const App = () => (
   
@@ -17,6 +18,7 @@ const App = () => (
       		<Route path="/dashboard" component={AdminDashBoard}/>
       		<Route path="/categories" component={ViewCategory}/>
       		<Route path="/editCategory/:id" component={EditCategory}/>
+      		<Route path="/deleteCategory/:id" component={DeleteCategory}/>
       	</Switch>
       </div>
     </BrowserRouter>

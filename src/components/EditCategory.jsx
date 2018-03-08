@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'; 
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
@@ -8,7 +9,8 @@ class EditCategory extends Component{
 	constructor(props) {
 		super(props)
 		this.state = {
-			categoryName: {}
+			categoryName: {},
+			redirect: false
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -27,7 +29,7 @@ class EditCategory extends Component{
 	    id = this.props.match.params.id;
 
 		id = id.charAt(0);
-		
+
 		if(editedName.hasOwnProperty('categoryName')) {
 			axios({
 				method: "put",
@@ -36,6 +38,7 @@ class EditCategory extends Component{
 			})
 			.then(response => {
 				console.log(response);
+				this.setState({redirect: true});
 			})
 			.catch(err => {
 				console.log(err);
@@ -61,7 +64,10 @@ class EditCategory extends Component{
 
 		categoryName = categoryName.substring(2);*/
 
-		console.log(this.state);
+		if(this.state.redirect) {
+			return <Redirect to='/categories'/> 
+		}
+
 		return (
 			<div>
 				<Header nav />

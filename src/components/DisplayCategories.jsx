@@ -9,7 +9,7 @@ const DisplayCategories = (props) => {
 
 		props.data.forEach(category => {
 
-			categoryTable.push(<tr><td>{category._id}</td><td>{category.categoryName}</td><td><Link to={`/editCategory/${category._id}&${category.categoryName}`}>edit</Link></td><td><Link to="/deleteCategory">delete</Link></td></tr>)
+			categoryTable.push(<tr><td>{category._id}</td><td>{category.categoryName}</td><td><Link to={`/editCategory/${category._id}&${category.categoryName}`}>edit</Link></td><td><Link to={`/deleteCategory/${category._id}`}>delete</Link></td></tr>)
 
 		})
 	}
