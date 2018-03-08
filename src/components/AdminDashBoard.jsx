@@ -43,8 +43,8 @@ class AdminDashboard extends Component {
       })
         .then(response => {
           console.log(response);
-          if(response) {
-          	this.setState({redirect: true});
+          if (response) {
+            this.setState({ redirect: true });
           }
         })
         .catch(err => {
@@ -56,10 +56,9 @@ class AdminDashboard extends Component {
   }
 
   render() {
-
-  	if(this.state.redirect) {
-  		return <Redirect to='/categories'/>
-  	}
+    if (this.state.redirect) {
+      return <Redirect to="/categories" />;
+    }
 
     return (
       <div>

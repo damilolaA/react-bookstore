@@ -17,7 +17,7 @@ const Header = props => {
             <Link to="/categories">view category</Link>
           </li>
           <li>
-            <Link to="">add book</Link>
+            <Link to="/addBook">add book</Link>
           </li>
           <li>
             <Link to="">view book</Link>
