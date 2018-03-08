@@ -40,7 +40,7 @@ class ViewCategory extends Component {
 								</tr>
 							</thead>
 							
-							<DisplayCategories data={this.state.categoryData.data}/>
+							<DisplayCategories key={this.state.categoryData.data} data={this.state.categoryData.data}/>
 			          		
 						</table>
 					</div>
