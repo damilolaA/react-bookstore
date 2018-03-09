@@ -24,7 +24,7 @@ class AdminDashboard extends Component {
 
     this.setState(data);
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
 
