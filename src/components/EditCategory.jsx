@@ -57,9 +57,6 @@ class EditCategory extends Component {
   }
 
   render() {
-    /*let categoryName = this.props.match.params.id;
-
-		categoryName = categoryName.substring(2);*/
 
     if (this.state.redirect) {
       return <Redirect to="/categories" />;

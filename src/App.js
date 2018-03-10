@@ -7,7 +7,7 @@ import ViewCategory from './components/ViewCategory';
 import EditCategory from './components/EditCategory';
 import AddBook from './components/AddBook';
 import ViewBook from './components/ViewBooks';
-import EditBook from '/components/EditBook';
+import EditBook from './components/EditBook';
 
 const App = () => (
   
