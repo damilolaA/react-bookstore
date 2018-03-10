@@ -32,7 +32,7 @@ const DisplayCategories = props => {
   if (props.data) {
     props.data.forEach((category, i) => {
       categoryTable.push(
-        <tr>
+        <tr key={category._id}>
           <td>{category._id}</td>
           <td>{category.categoryName}</td>
           <td>

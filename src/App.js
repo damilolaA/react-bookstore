@@ -7,6 +7,7 @@ import ViewCategory from './components/ViewCategory';
 import EditCategory from './components/EditCategory';
 import AddBook from './components/AddBook';
 import ViewBook from './components/ViewBooks';
+import EditBook from '/components/EditBook';
 
 const App = () => (
   
@@ -21,6 +22,7 @@ const App = () => (
       		<Route path="/editCategory/:id" component={EditCategory}/>
       		<Route path="/addBook" component={AddBook}/>
           <Route path="/viewBooks" component={ViewBook}/>
+          <Route path="/editBook/:id" component={EditBook}/>
       	</Switch>
       </div>
     </BrowserRouter>

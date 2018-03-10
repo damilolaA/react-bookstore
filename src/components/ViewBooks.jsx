@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import DisplayBooks from './DisplayBooks';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -10,6 +11,8 @@ class ViewBooks extends Component {
 		this.state = {
 			bookData: {}
 		}
+
+		this.removeBook = this.removeBook.bind(this);
 	}
 
 	componentDidMount() {
@@ -52,7 +55,7 @@ class ViewBooks extends Component {
 							<th>delete</th>
 		                </tr>
 		              </thead>
-		              
+		              <DisplayBooks removeBook={this.removeBook} data={this.state.bookData.data}/>
 		            </table>
 		          </div>
 		        </div>
