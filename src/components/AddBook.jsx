@@ -7,9 +7,6 @@ class AddBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null,
-      bookData: {},
-      category: '',
       fetchedCategories: ''
     };
 
@@ -47,17 +44,14 @@ class AddBook extends Component {
   }
 
   postData(form) {
-    let //data = this.state.bookData,
-      url = 'https://bookstoreappapi.herokuapp.com/api/v1/books',
+    let url = 'https://bookstoreappapi.herokuapp.com/api/v1/books',
       config = {
         headers: {
           'content-type': 'multipart/form-data'
         }
-      };
+      },
+      formData = new FormData(form);
 
-    let formData = new FormData(form);
-
-    //if(data.hasOwnProperty('imagePath')) {
     axios
       .post(url, formData, config)
       .then(response => {
@@ -66,9 +60,6 @@ class AddBook extends Component {
       .catch(err => {
         console.log(err);
       });
-    /*} else {
-      console.log('could not add book');
-    }*/
   }
 
   render() {
@@ -101,7 +92,7 @@ class AddBook extends Component {
 
             <div>
               <label>category:</label>
-              <select onChange={this.handleCategory} name="categoryId">
+              <select name="categoryId">
                 {this.state.fetchedCategories}
               </select>
             </div>
