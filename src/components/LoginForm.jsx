@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import LoadingGif from './LoadingGif';
 
 class LoginForm extends Component {
   constructor() {
@@ -30,6 +31,8 @@ class LoginForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    this.setState({loading: true});
 
     this.validateLoginDetails();
 
@@ -65,9 +68,11 @@ class LoginForm extends Component {
 
           this.setState({ responseData: responseData });
           this.setState({ redirect: true });
+          this.setState({loading: false});
         })
         .catch(err => {
           console.log(err);
+          this.setState({loading: false});
         });
     } else {
       console.log('no data to post');
@@ -98,12 +103,14 @@ class LoginForm extends Component {
             <input onChange={this.handleChange} type="password" name="password" placeholder="password" />
           </div>
 
-          <input type="submit" name="register" value="login" />
+          <input type="submit" name="register" value="login" /> { this.state.loading ? <LoadingGif /> : null }
+            
         </form>
 
         <h4 className="jumpto">
           Don't have an account? <a href="/register">register</a>
         </h4>
+        
       </div>
     );
   }
