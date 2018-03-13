@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
+import LoadingGif from './LoadingGif';
 
 class AdminDashboard extends Component {
   constructor() {
@@ -28,6 +29,8 @@ class AdminDashboard extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    this.setState({loading: true});
+
     this.postCategory();
   }
 
@@ -45,6 +48,7 @@ class AdminDashboard extends Component {
           console.log(response);
           if (response) {
             this.setState({ redirect: true });
+            this.setState({loading: false});
           }
         })
         .catch(err => {
@@ -73,6 +77,7 @@ class AdminDashboard extends Component {
             </div>
 
             <input type="submit" name="category" value="Add" />
+            {this.state.loading ? <LoadingGif/> : null}
           </form>
         </div>
         <Footer />

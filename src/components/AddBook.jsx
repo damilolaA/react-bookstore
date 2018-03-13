@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
+import LoadingGif from './LoadingGif';
 
 class AddBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fetchedCategories: ''
+      fetchedCategories: '',
+      redirect: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +43,8 @@ class AddBook extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    this.setState({loading: true});
+
     this.postData(e.target);
   }
 
@@ -56,6 +61,8 @@ class AddBook extends Component {
       .post(url, formData, config)
       .then(response => {
         console.log(response);
+        this.setState({redirect: true});
+        this.setState({loading: false});
       })
       .catch(err => {
         console.log(err);
@@ -63,6 +70,12 @@ class AddBook extends Component {
   }
 
   render() {
+    const redirect = this.state.redirect;
+
+    if(redirect) {
+      return <Redirect to="/viewBooks"/>
+    }
+
     return (
       <div>
         <Header nav />
@@ -103,6 +116,7 @@ class AddBook extends Component {
             </div>
 
             <input type="submit" name="category" value="Add" />
+            { this.state.loading ? < LoadingGif /> : null }
           </form>
         </div>
         <Footer />

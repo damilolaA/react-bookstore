@@ -3,12 +3,14 @@ import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 import DisplayCategories from './DisplayCategories';
+import LoadingGif from './LoadingGif';
 
 class ViewCategory extends Component {
   constructor() {
     super();
     this.state = {
-      categoryData: {}
+      categoryData: {},
+      loading: true
     };
 
     this.removeCategory = this.removeCategory.bind(this);
@@ -19,6 +21,7 @@ class ViewCategory extends Component {
       .get('https://bookstoreappapi.herokuapp.com/api/v1/category')
       .then(response => {
         this.setState({ categoryData: { data: response.data } });
+        this.setState({loading: false});
       })
       .catch(err => {
         console.log(err);
@@ -36,6 +39,13 @@ class ViewCategory extends Component {
   }
 
   render() {
+
+    const loading = this.state.loading;
+
+    if(loading) {
+      return < LoadingGif/>
+    } 
+
     return (
       <div>
         <Header nav />

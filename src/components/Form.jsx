@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import LoadingGif from './LoadingGif';
 
 class Form extends Component {
   constructor() {
@@ -14,7 +15,7 @@ class Form extends Component {
         hash: ''
       },
       id: '',
-      redirect: false
+      redirect: false,
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -23,6 +24,8 @@ class Form extends Component {
 
   submitForm(e) {
     e.preventDefault();
+
+    this.setState({loading: true});
 
     this.validateForm();
 
@@ -76,7 +79,7 @@ class Form extends Component {
         .then(response => {
           console.log(response);
           this.setState({ id: response.data._id });
-
+          this.setState({loading: false});
           this.setState({ redirect: true });
         })
         .catch(err => {
@@ -125,6 +128,7 @@ class Form extends Component {
             </div>
 
             <input type="submit" name="register" value="register" />
+            {this.state.loading ? <LoadingGif /> : null}
           </form>
 
           <h4 className="jumpto">

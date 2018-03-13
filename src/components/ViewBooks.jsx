@@ -3,13 +3,15 @@ import axios from 'axios';
 import DisplayBooks from './DisplayBooks';
 import Header from './Header';
 import Footer from './Footer';
+import LoadingGif from './LoadingGif';
 
 class ViewBooks extends Component {
 
 	constructor() {
 		super()
 		this.state = {
-			bookData: {}
+			bookData: {},
+			loading: true
 		}
 
 		this.removeBook = this.removeBook.bind(this);
@@ -20,6 +22,7 @@ class ViewBooks extends Component {
 	      .get('https://bookstoreappapi.herokuapp.com/api/v1/books')
 	      .then(response => {
 	        this.setState({ bookData: { data: response.data } });
+	        this.setState({loading: false});
 	      })
 	      .catch(err => {
 	        console.log(err);
@@ -37,6 +40,12 @@ class ViewBooks extends Component {
 	}
 
 	render() {
+		const loading = this.state.loading;
+
+		if(loading) {
+			return < LoadingGif/>
+		}
+
 		return (
 			<div>
 				<Header nav/>

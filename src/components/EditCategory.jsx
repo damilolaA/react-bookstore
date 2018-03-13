@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
+import LoadingGif from './LoadingGif';
 
 class EditCategory extends Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class EditCategory extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    this.setState({loading: true});
 
     this.postEditedCategory();
   }
@@ -37,6 +40,7 @@ class EditCategory extends Component {
         .then(response => {
           console.log(response);
           this.setState({ redirect: true });
+          this.setState({loading: false});
         })
         .catch(err => {
           console.log(err);
@@ -50,9 +54,8 @@ class EditCategory extends Component {
     let data = this.state,
       inputName = e.target.name;
 
-    console.log(data);
     data[inputName] = e.target.value;
-    console.log(data);
+
     this.setState(data);
   }
 
@@ -75,6 +78,7 @@ class EditCategory extends Component {
             </div>
 
             <input type="submit" name="category" value="Edit" />
+            { this.state.loading ? < LoadingGif /> : null }
           </form>
         </div>
         <Footer />
