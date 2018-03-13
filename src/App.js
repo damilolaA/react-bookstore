@@ -8,13 +8,16 @@ import EditCategory from './components/EditCategory';
 import AddBook from './components/AddBook';
 import ViewBook from './components/ViewBooks';
 import EditBook from './components/EditBook';
+import AdminLanding from './components/AdminLanding';
+
+const FourOFour = () => <h1>Hey you are lost</h1>;
 
 const App = () => (
-  
-    
+   
     <BrowserRouter>
       <div className="App">
       	<Switch>
+          <Route exact path="/" component={AdminLanding} /> 
       		<Route path="/register" component={AdminRegister}/>
       		<Route path="/login" component={AdminLogin} />
       		<Route path="/dashboard" component={AdminDashBoard}/>
@@ -23,6 +26,7 @@ const App = () => (
       		<Route path="/addBook" component={AddBook}/>
           <Route path="/viewBooks" component={ViewBook}/>
           <Route path="/editBook/:id" component={EditBook}/>
+          <Route component={FourOFour} />
       	</Switch>
       </div>
     </BrowserRouter>
