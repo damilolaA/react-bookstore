@@ -9,6 +9,7 @@ import AddBook from './components/AddBook';
 import ViewBook from './components/ViewBooks';
 import EditBook from './components/EditBook';
 import AdminLanding from './components/AdminLanding';
+import AdminLogout from './components/AdminLogout';
 
 const FourOFour = () => <h1>Hey you are lost</h1>;
 
@@ -26,6 +27,7 @@ const App = () => (
       		<Route path="/addBook" component={AddBook}/>
           <Route path="/viewBooks" component={ViewBook}/>
           <Route path="/editBook/:id" component={EditBook}/>
+          <Route path="/logout" component={AdminLogout}/>
           <Route component={FourOFour} />
       	</Switch>
       </div>

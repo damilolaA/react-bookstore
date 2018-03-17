@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 import LoadingGif from './LoadingGif';
+import IsLoggedIn from './IsLoggedIn';
 
 class AddBook extends Component {
   constructor(props) {
@@ -70,7 +71,12 @@ class AddBook extends Component {
   }
 
   render() {
-    const redirect = this.state.redirect;
+    const redirect = this.state.redirect,
+          token = localStorage.getItem('adminToken');
+
+    if(!token) {
+      return <IsLoggedIn/>
+    }
 
     if(redirect) {
       return <Redirect to="/viewBooks"/>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from './Header'
 import Footer from './Footer';
+import IsLoggedIn from './IsLoggedIn';
 
 class EditBook extends Component {
 
@@ -13,6 +14,12 @@ class EditBook extends Component {
 	}
 
 	render() {
+
+		let token = localStorage.getItem('token');
+
+	    if(!token) {
+	      return <IsLoggedIn/>;
+    	}
 
 		if (this.state.redirect) {
 	      return <Redirect to="/viewBooks" />;

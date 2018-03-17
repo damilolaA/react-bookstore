@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import LoadingGif from './LoadingGif';
+import IsLoggedIn from './IsLoggedIn';
 
 class AdminDashboard extends Component {
   constructor() {
@@ -60,6 +61,13 @@ class AdminDashboard extends Component {
   }
 
   render() {
+
+    let token = localStorage.getItem('adminToken');
+
+    if(!token) {
+      return <IsLoggedIn/>;
+    }
+
     if (this.state.redirect) {
       return <Redirect to="/categories" />;
     }

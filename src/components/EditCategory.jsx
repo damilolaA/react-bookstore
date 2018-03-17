@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 import LoadingGif from './LoadingGif';
+import IsLoggedIn from './IsLoggedIn';
 
 class EditCategory extends Component {
   constructor(props) {
@@ -81,11 +82,16 @@ class EditCategory extends Component {
 
   render() {
 
+    let token = localStorage.getItem('adminToken'),
+        oldCategory;
+
+    if(!token) {
+      return <IsLoggedIn/>;
+    }
+ 
     if (this.state.redirect) {
       return <Redirect to="/categories" />;
     }
-    
-    let oldCategory;
 
     if(this.state.oldCategory) {
       oldCategory = <input onChange={this.handleChange} type="text" name="categoryName" defaultValue={this.state.oldCategory}/>

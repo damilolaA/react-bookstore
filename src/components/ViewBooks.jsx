@@ -4,6 +4,7 @@ import DisplayBooks from './DisplayBooks';
 import Header from './Header';
 import Footer from './Footer';
 import LoadingGif from './LoadingGif';
+import IsLoggedIn from './IsLoggedIn';
 
 class ViewBooks extends Component {
 
@@ -18,8 +19,15 @@ class ViewBooks extends Component {
 	}
 
 	componentDidMount() {
+		let token = localStorage.getItem('adminToken');
+
+		let config = {
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		};
 	    axios
-	      .get('https://bookstoreappapi.herokuapp.com/api/v1/books')
+	      .get('https://bookstoreappapi.herokuapp.com/api/v1/books', config)
 	      .then(response => {
 	        this.setState({ bookData: { data: response.data } });
 	        this.setState({loading: false});
@@ -40,7 +48,13 @@ class ViewBooks extends Component {
 	}
 
 	render() {
-		const loading = this.state.loading;
+
+		const loading = this.state.loading,
+		      token = localStorage.getItem('adminToken');
+
+		if(!token) {
+			return <IsLoggedIn/>;
+		}
 
 		if(loading) {
 			return < LoadingGif/>

@@ -23,7 +23,7 @@ const Header = props => {
             <Link to="/viewBooks">view book</Link>
           </li>
           <li>
-            <Link to="">logout</Link>
+            <Link to="/logout">logout</Link>
           </li>
         </ul>
       </nav>

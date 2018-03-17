@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import DisplayCategories from './DisplayCategories';
 import LoadingGif from './LoadingGif';
+import IsLoggedIn from './IsLoggedIn';
 
 class ViewCategory extends Component {
   constructor() {
@@ -40,7 +41,12 @@ class ViewCategory extends Component {
 
   render() {
 
-    const loading = this.state.loading;
+    const loading = this.state.loading,
+          token = localStorage.getItem('adminToken');
+
+    if(!token) {
+      return <IsLoggedIn/>
+    }
 
     if(loading) {
       return < LoadingGif/>
