@@ -37,6 +37,12 @@ class LoginForm extends Component {
     this.validateLoginDetails();
 
     this.postLoginData();
+
+    /*if(this.state.responseData) {
+      let token = this.state.responseData._token;
+      
+      localStorage.setItem("adminToken", token);
+    }*/
   }
 
   validateLoginDetails() {
@@ -63,8 +69,11 @@ class LoginForm extends Component {
         data: loginData
       })
         .then(response => {
-          console.log(response.data);
-          let responseData = response.data;
+          //console.log(response.data._token);
+          let responseData = response.data,
+              token = response.data._token;
+
+          localStorage.setItem("adminToken", token);
 
           this.setState({ responseData: responseData });
           this.setState({ redirect: true });
