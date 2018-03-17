@@ -10,7 +10,8 @@ class EditCategory extends Component {
     super(props);
     this.state = {
       categoryName: {},
-      redirect: false
+      redirect: false,
+      oldCategory: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -50,6 +51,25 @@ class EditCategory extends Component {
     }
   }
 
+  componentDidMount() {
+
+    let id = this.props.match.params.id;
+
+    id = id.charAt(0);
+
+    if(id) {
+      axios
+        .get(`https://bookstoreappapi.herokuapp.com/api/v1/category/${id}`)
+        .then(response => {
+          this.setState({oldCategory: response.data.categoryName});
+        })
+        .catch(err => {
+          console.log(err);
+      });
+    }
+  }
+
+
   handleChange(e) {
     let data = this.state,
       inputName = e.target.name;
@@ -64,7 +84,13 @@ class EditCategory extends Component {
     if (this.state.redirect) {
       return <Redirect to="/categories" />;
     }
+    
+    let oldCategory;
 
+    if(this.state.oldCategory) {
+      oldCategory = <input onChange={this.handleChange} type="text" name="categoryName" defaultValue={this.state.oldCategory}/>
+    }
+    
     return (
       <div>
         <Header nav />
@@ -74,9 +100,8 @@ class EditCategory extends Component {
           <form id="register" onSubmit={this.handleSubmit}>
             <div>
               <label>category name:</label>
-              <input onChange={this.handleChange} type="text" name="categoryName" />
+              {oldCategory}
             </div>
-
             <input type="submit" name="category" value="Edit" />
             { this.state.loading ? < LoadingGif /> : null }
           </form>
