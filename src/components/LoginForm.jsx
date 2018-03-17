@@ -103,7 +103,7 @@ class LoginForm extends Component {
             <input onChange={this.handleChange} type="password" name="password" placeholder="password" />
           </div>
 
-          <input type="submit" name="register" value="login" /> { this.state.loading ? <LoadingGif /> : null }
+         <p><input type="submit" name="register" value="login" />{this.state.loading ? <LoadingGif /> : null}</p>
             
         </form>
 
