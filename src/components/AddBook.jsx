@@ -112,7 +112,17 @@ class AddBook extends Component {
             <div>
               <label>category:</label>
               <select name="categoryId">
+                <option>Select Category</option>
                 {this.state.fetchedCategories}
+              </select>
+            </div>
+
+            <div>
+              <label>type:</label>
+              <select name="type">
+                <option>Select Type</option>
+                <option value="topSelling">Top-Selling</option>
+                <option value="trending">Trending</option>
               </select>
             </div>
 
