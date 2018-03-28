@@ -25,8 +25,6 @@ class Form extends Component {
   submitForm(e) {
     e.preventDefault();
 
-    this.setState({loading: true});
-
     this.validateForm();
 
     this.postAdminData();
@@ -71,6 +69,7 @@ class Form extends Component {
     console.log(data);
 
     if (data['firstName'] !== '' && data['lastName'] !== '' && data['email'] !== '' && data['hash'] !== '') {
+      this.setState({ loading: true });
       axios({
         method: 'post',
         url: 'https://bookstoreappapi.herokuapp.com/api/v1/admin',

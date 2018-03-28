@@ -32,8 +32,6 @@ class LoginForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.setState({loading: true});
-
     this.validateLoginDetails();
 
     this.postLoginData();
@@ -57,6 +55,7 @@ class LoginForm extends Component {
     let loginData = this.state.loginDetails;
 
     if (loginData['email'] !== '' && loginData['password'] !== '') {
+      this.setState({ loading: true });
       axios({
         method: 'post',
         url: 'https://bookstoreappapi.herokuapp.com/api/v1/auth',
@@ -71,7 +70,7 @@ class LoginForm extends Component {
           
           this.setState({ responseData: responseData });
           this.setState({ redirect: true });
-          this.setState({loading: false});
+          this.setState({ loading: false });
         })
         .catch(err => {
           console.log(err);
