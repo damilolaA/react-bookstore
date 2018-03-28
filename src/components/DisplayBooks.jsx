@@ -41,7 +41,7 @@ const DisplayBooks = props => {
 	          <td>{book.publicationDate}</td>
 	          <td><img alt="" src={book.imagePath} height="50" width="50"/></td>
 	          <td>
-	            <Link to={`/editBook/${book._id}&${book.title}`}>edit</Link>
+	            <Link to={`/editBook/${book._id}`}>edit</Link>
 	          </td>
 	          <td>
 	            <a

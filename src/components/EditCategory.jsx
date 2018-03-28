@@ -56,8 +56,6 @@ class EditCategory extends Component {
 
     let id = this.props.match.params.id;
 
-    id = id.charAt(0);
-
     if(id) {
       axios
         .get(`https://bookstoreappapi.herokuapp.com/api/v1/category/${id}`)
@@ -94,7 +92,7 @@ class EditCategory extends Component {
     }
 
     if(this.state.oldCategory) {
-      oldCategory = <input onChange={this.handleChange} type="text" name="categoryName" defaultValue={this.state.oldCategory}/>
+      oldCategory = <input onChange={this.handleChange} type="text" name="categoryName" defaultValue={this.state.oldCategory} />
     }
     
     return (

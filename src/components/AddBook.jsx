@@ -49,14 +49,14 @@ class AddBook extends Component {
     this.postData(e.target);
   }
 
-  postData(form) {
+  postData(formVal) {
     let url = 'https://bookstoreappapi.herokuapp.com/api/v1/books',
       config = {
         headers: {
           'content-type': 'multipart/form-data'
         }
       },
-      formData = new FormData(form);
+      formData = new FormData(formVal);
 
     axios
       .post(url, formData, config)

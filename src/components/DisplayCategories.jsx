@@ -36,7 +36,7 @@ const DisplayCategories = props => {
           <td>{category._id}</td>
           <td>{category.categoryName}</td>
           <td>
-            <Link to={`/editCategory/${category._id}&${category.categoryName}`}>edit</Link>
+            <Link to={`/editCategory/${category._id}`}>edit</Link>
           </td>
           <td>
             <a
