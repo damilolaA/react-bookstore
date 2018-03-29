@@ -17,7 +17,7 @@ const Landing = () => {
 		        <div className="row">
 		          <div className="col-xl-9 mx-auto">
 		            <h1 className="mb-5">React Bookstore</h1>
-		            <h3 className="mb-5">Login or Register if you are registered</h3>
+		            <h3 className="mb-5">Login or Register</h3>
 		          </div>
 		        </div>
 		      </div>
