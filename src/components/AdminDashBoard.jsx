@@ -11,7 +11,8 @@ class AdminDashboard extends Component {
     super();
     this.state = {
       categoryData: {},
-      redirect: false
+      redirect: false,
+      errorMessages: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,16 +31,14 @@ class AdminDashboard extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.setState({loading: true});
-
     this.postCategory();
   }
 
   postCategory() {
     let categoryInfo = this.state.categoryData;
 
-    console.log(categoryInfo);
     if (categoryInfo.hasOwnProperty('categoryName')) {
+      this.setState({loading: true});
       axios({
         method: 'post',
         url: 'https://bookstoreappapi.herokuapp.com/api/v1/category',
@@ -56,12 +55,12 @@ class AdminDashboard extends Component {
           console.log(err);
         });
     } else {
-      console.log('could not add category');
+      this.setState({errorMessages: "Please enter a category name"});
     }
   }
 
   render() {
-
+    console.log(this.state.errorMessages);
     let token = localStorage.getItem('adminToken');
 
     if(!token) {
@@ -72,14 +71,17 @@ class AdminDashboard extends Component {
       return <Redirect to="/categories" />;
     }
 
+    let pageName = this.props.location.pathname;
+
     return (
       <div>
-        <Header nav />
+        <Header nav path={pageName}/>
         <div className="wrapper">
           <h1 id="register-label">Add Category</h1>
           <hr />
           <form id="register" onSubmit={this.handleSubmit}>
             <div>
+              <p className="err">{this.state.errorMessages ? this.state.errorMessages : ''}</p>
               <label>category name:</label>
               <input onChange={this.handleChange} type="text" name="categoryName" placeholder="category name" />
             </div>

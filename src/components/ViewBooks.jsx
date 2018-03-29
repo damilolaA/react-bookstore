@@ -60,9 +60,11 @@ class ViewBooks extends Component {
 			return < LoadingGif/>
 		}
 
+		let pageName = this.props.location.pathname;
+
 		return (
 			<div>
-				<Header nav/>
+				<Header nav path={pageName} />
 				<div className="wrapper">
 		          <div id="stream">
 		            <table id="tab">

@@ -11,7 +11,8 @@ class AddBook extends Component {
     super(props);
     this.state = {
       fetchedCategories: '',
-      redirect: false
+      redirect: false,
+      errorMessages: {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -82,9 +83,11 @@ class AddBook extends Component {
       return <Redirect to="/viewBooks"/>
     }
 
+    let pageName = this.props.location.pathname;
+    console.log(pageName);
     return (
       <div>
-        <Header nav />
+        <Header nav path={pageName}/>
         <div className="wrapper">
           <h1 id="register-label">Add Book</h1>
           <hr />

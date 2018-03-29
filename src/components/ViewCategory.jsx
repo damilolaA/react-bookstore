@@ -48,13 +48,16 @@ class ViewCategory extends Component {
       return <IsLoggedIn/>
     }
 
+    
     if(loading) {
       return < LoadingGif/>
-    } 
+    }
+
+    let pageName = this.props.location.pathname;
 
     return (
       <div>
-        <Header nav />
+        <Header nav path={pageName}/>
         <div className="wrapper">
           <div id="stream">
             <table id="tab">
