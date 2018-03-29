@@ -76,7 +76,7 @@ class Form extends Component {
         data: data
       })
         .then(response => {
-          console.log(response);
+          
           this.setState({ id: response.data._id });
           this.setState({loading: false});
           this.setState({ redirect: true });
