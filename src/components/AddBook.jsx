@@ -73,6 +73,7 @@ class AddBook extends Component {
 
   render() {
     const redirect = this.state.redirect,
+          pageName = this.props.location.pathname,
           token = localStorage.getItem('adminToken');
 
     if(!token) {
@@ -83,11 +84,10 @@ class AddBook extends Component {
       return <Redirect to="/viewBooks"/>
     }
 
-    let pageName = this.props.location.pathname;
-    console.log(pageName);
     return (
       <div>
         <Header nav path={pageName}/>
+
         <div className="wrapper">
           <h1 id="register-label">Add Book</h1>
           <hr />
@@ -138,6 +138,7 @@ class AddBook extends Component {
             { this.state.loading ? < LoadingGif /> : null }
           </form>
         </div>
+        
         <Footer />
       </div>
     );
