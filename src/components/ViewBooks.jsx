@@ -56,9 +56,18 @@ class ViewBooks extends Component {
 			return <IsLoggedIn/>;
 		}
 
-		if(loading) {
+		/*if(loading) {
 			return < LoadingGif/>
-		}
+		}*/
+
+		const styles = {
+	     width: '15%',
+	     height: '15%',
+	     display: 'block',
+	     backgroundRepeat: 'no-repeat',
+	     backgroundPosition: 'center',
+	     marginRight: 500
+	    };
 
 		let pageName = this.props.location.pathname;
 
@@ -82,6 +91,7 @@ class ViewBooks extends Component {
 		              </thead>
 		              <DisplayBooks removeBook={this.removeBook} data={this.state.bookData.data}/>
 		            </table>
+		            {loading ? <LoadingGif style={styles}/> : null}
 		          </div>
 		        </div>
 				<Footer />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import LoadingGif from './LoadingGif';
+import Gif from "../spinner.gif";
 
 class LoginForm extends Component {
   constructor() {
@@ -105,7 +105,8 @@ class LoginForm extends Component {
             <input onChange={this.handleChange} type="password" name="password" placeholder="password" />
           </div>
 
-         <p><input type="submit" name="register" value="login" />{this.state.loading ? <LoadingGif /> : null}</p>
+         <p><input type="submit" name="register" value="login"/>
+         {this.state.loading ? <img alt="Loading..." src={Gif} width="100" /> : null}</p>
             
         </form>
 

@@ -48,10 +48,18 @@ class ViewCategory extends Component {
       return <IsLoggedIn/>
     }
 
-    
-    if(loading) {
-      return < LoadingGif/>
-    }
+    const styles = {
+     width: '15%',
+     height: '15%',
+     position: 'fixed',
+     display: 'block',
+     backgroundRepeat: 'no-repeat',
+     backgroundPosition: 'center',
+     left : 0,
+     bottom : 0,
+     right : 0,
+     top : 0
+    };
 
     let pageName = this.props.location.pathname;
 
@@ -69,9 +77,11 @@ class ViewCategory extends Component {
                   <th>delete</th>
                 </tr>
               </thead>
-
+          
               <DisplayCategories removeCategory={this.removeCategory} data={this.state.categoryData.data} />
+            
             </table>
+            {loading ? <LoadingGif style={styles}/> : null}
           </div>
         </div>
         <Footer />
