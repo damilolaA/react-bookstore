@@ -51,7 +51,6 @@ class EditBook extends Component {
 	postEditedBook(formValue) {
 		let id = this.props.match.params.id;
 		let formData = new FormData(formValue),
-		//let url = `https://bookstoreappapi.herokuapp.com/api/v1/books/${id}`,
 	    config = {
 	    	url: `https://bookstoreappapi.herokuapp.com/api/v1/books/${id}`,
 	        headers: {
