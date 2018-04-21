@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component should render component correctly 1`] = `
+<section
+  className="foot"
+>
+  <div>
+    <p>
+      © 2017
+    </p>
+  </div>
+</section>
+`;

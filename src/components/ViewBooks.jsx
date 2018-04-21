@@ -56,10 +56,6 @@ class ViewBooks extends Component {
 			return <IsLoggedIn/>;
 		}
 
-		/*if(loading) {
-			return < LoadingGif/>
-		}*/
-
 		const styles = {
 	     width: '15%',
 	     height: '15%',
