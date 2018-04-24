@@ -11,6 +11,6 @@ deploy:
   provider: heroku
   api_key:
     secure: E4c5UfhyP80dUynrkrvBO2TBNSXVOtMQmwVKUm73TpK2zi3DnjqiOcYsqY3WN6+UcPUXBdQbnnB6APaWKRP0hJw4V8iNBkQvmwlf0X6/7zRwWD2gXOrcgbgPh67wgc4e7q0D8+xobDmcxNwAZgDMg8TYIASexYiST38DCp2015oLxiweeKJ4kSY7Q0B7jXlkR/zJ+HFBFRSIsWOQj8l4+G/IZkl0kQGTNOnuQ5DH593h5FvJ43Ue5w0RhM0TOgtqe0zRVkGO/JMRb7IpH199skJdcsFmTpGvuJPxuiPzuh0ry4tYQsRZIZ8Birvd30xw4L0pTHT0jDNgoo9+jI7OgSa8IyYTgNUsd00IgUhbtVMPKpyUgUKWtd/hB4JZa+ZjFw5MSfi/Cb7Snqnm5POd/nN7jBS1SDGR5k9zDfAKhaS4V+IY2J2pdLJjmXYtqN/NND8dN3VfNvOKK72ZGn2k6TTG7klPs2/SoZU37znOiTIHkhNmoH05k/WpcuJtg3/83jN+vrAwiQCr+Gbj7MVeiP8s6GEX3vlBMpKOK610rEJkMqEM6C3KK3+soHz1dAlaGpkpgdbrMgw5YG3wuJgJAzCEdIzpS5EhXx7gao6o9VSUbJz8jNGOQhidDo9lLtmj5AX0iyL/16a041LZ1/8dP1/TJL1VkvqCkJ57xAeccng=
-  app: react-bookstore
+  app: adminreactbookstore
   on:
     repo: damilolaA/react-bookstore
